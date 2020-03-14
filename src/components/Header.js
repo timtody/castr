@@ -2,18 +2,19 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import GoogleAuth from "./GoogleAuth";
+import "../static/signIn.css";
 
 const Header = () => {
   return (
     <div className="ui secondary pointing menu">
-      <div className="item">
-        <Link to="/">Streamy</Link>
-      </div>
+      <Link className="item" to="/">
+        <b>castr</b>
+      </Link>
       <div className="right menu">
-        <div className="item">
-          <Link to="/">All Streams</Link>
-        </div>
-        <div className="item">
+        <Link className="item" to="/">
+          All Streams
+        </Link>
+        <div className="item sign-in">
           <GoogleAuth />
         </div>
       </div>
