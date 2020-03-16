@@ -1,5 +1,13 @@
 import streams from "../apis/streams";
-import { SIGN_IN, SIGN_OUT, CREATE_STREAM } from "./types";
+import {
+  SIGN_IN,
+  SIGN_OUT,
+  CREATE_STREAM,
+  UPDATE_STREAM,
+  DELETE_STREAM,
+  GET_STREAM,
+  GET_STREAMS
+} from "./types";
 
 export const signIn = userId => {
   return {
@@ -19,4 +27,24 @@ export const createStream = formValues => async dispatch => {
     ...formValues
   });
   dispatch({ type: CREATE_STREAM, payload: response.data });
+};
+
+export const deleteStream = id => async dispatch => {
+  await streams.delete("streams/" + id);
+  dispatch({ type: DELETE_STREAM, payload: id });
+};
+
+export const updateStream = (id, formValues) => async dispatch => {
+  const response = await streams.put("streams/" + id, { ...formValues });
+  dispatch({ type: UPDATE_STREAM, payload: response.data });
+};
+
+export const getStream = id => async dispatch => {
+  const response = await streams.get("streams" + id);
+  dispatch({ type: GET_STREAM, payload: response.data });
+};
+
+export const getStreams = () => async dispatch => {
+  const response = await streams.get("streams");
+  dispatch({ type: GET_STREAMS, payload: response.data });
 };
